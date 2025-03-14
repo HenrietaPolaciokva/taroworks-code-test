@@ -79,6 +79,7 @@ At minimum, you should:
 1. Using the same APEX function, write a Web Frontend (Javascript, JS library of your choice, Visualforce, Lightning Web Component view or a Salesforce Screen Flow) to take input and display the same results
 2. Demonstrate how you would migrate your code between environments using Salesforce CLI tools, including the commands to do so
 3. Currently the APEX, Java and JS projects are all contained in one file each within the same repository. Describe how you would organize the project and justify your logic.
+4. Make a github repository for your solution and document it appropriately.
 
 ## Materials to submit:
 1. A copy of your code 
