@@ -11,6 +11,8 @@ This test will require:
 6. (Optional but helpful) VSCode Extensions for Salesforce (https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode)
 7. (Optional) POSTMan for API Testing  (https://www.postman.com/)
 8. (Optional) If you are on windows, a way to run the "cURL" command such as git-scm (https://git-scm.com/downloads/win)
+9. Git or a tool to interact with git
+10. A github account (your final solution will need to be uploaded to github)
 
 ## Salesforce Environment
 
