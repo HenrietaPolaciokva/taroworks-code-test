@@ -6,6 +6,6 @@ global with sharing class ClientOrderProcessor {
     @HttpPost
     global static String doGet() {
         String name = RestContext.request.params.get('name');
-        return 'Hello '+name;
+        return '{"message": "Hello ' + name + '!"}';
     }
 }

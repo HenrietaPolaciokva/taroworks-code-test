@@ -16,11 +16,11 @@ This test will require:
 
 ## Salesforce Environment
 
-You will have received an email with your scratch org credentials. You can use these credentials to login and configure the salesforce scratch org. The environment will be deleted within a month of your code test, you can treat it as “yours” and make any changes you wish. The environment will be checked automatically to verify functionality and your code will be reviewed.
+You have already received an email with your scratch org credentials. You can use these credentials to login and configure the salesforce scratch org. The environment will be deleted within a month of your code test, you can treat it as “yours” and make any changes you wish (please do not change the admin password or add multi-factor authentication as this may complicate scoring). The environment will be checked automatically to verify functionality and your code will be reviewed both in your submission and within the salesforce org.
 
  Note that the pre-configured URL ("fun-momentum-8899-dev-ed") is for demonstration only and should not be used in your submission - use the credentials sent via email instead.
 
- This cURL command demonstrates the API - replace the URL with your scratch org to verify that your org is configured properly.
+ This cURL command demonstrates the API - replace the URL with your scratch org to verify that your org is configured properly. Also included in this repository are POSTMan tests that accomplish the same task.
 
 ```
 curl --location --request POST 'https://fun-momentum-8899-dev-ed.scratch.my.salesforce-sites.com/services/apexrest/ClientOrderProcessor?name=TaroDev'
@@ -28,7 +28,7 @@ curl --location --request POST 'https://fun-momentum-8899-dev-ed.scratch.my.sale
 
 ## Java Environment
 
-You have been provided a Java command line utility. The included code will call the Salesforce API described using this syntax:
+You have been provided a Java command line starter template. The included code will call the Salesforce API described using this syntax:
 
 ```
 java java/CallAPIClass.java TaroDev 
@@ -48,6 +48,10 @@ There are a number of security issues with this repository. Identify at least 5,
 
 The API included in ClientOrderProcessor.cls has a number of stylistic issues. Identify at least 4 and explain how you would improve them.
 
+## Java Code
+
+Modify the java code to parse and display JSON results in a table, printed to the command line.
+
 ## Frontend Debugging
 
 The Javascript in 'javascript/CallAPIClass.html' will not work in your environment (attempting to POST with the current code will throw an error). Solve and explain the error. 
@@ -63,31 +67,30 @@ Implement an APEX Controller that will respond to GET requests for an API
 
 At minimum, you should:
 1. Create custom objects to represent the relevant logic of the problem (such as client orders and bag sizes). In a real salesforce org you would use built-in standard objects, but for this test you should use only custom objects in your solution (we aren’t testing knowledge of salesforce objects, but we are testing your ability to follow instructions).
-2. Modify the APEX API function to take relevant inputs and perform any necessary calculations
+2. Modify the APEX ClientOrderProcessor function to take relevant inputs and perform any necessary calculations
 3. Modify the Java Code to call your API appropriately and display the result in the command line
 
 ## Bonus Points (Android):
-1. Create a Simple Android Application to run the same Java code (calling the Salesforce API)
-2. Add a frontend to the Android Application to call the API with approprite arguments
+1. Create a Simple Android Application to act as a frontend (calling the Salesforce API based on user-submitted data)
 
 
 ## Bonus Points (Logic):
 1. Rewrite your algorithm to make the bag sizes dynamic
 2. Rewrite your algorithm to minimize the number of total bags given per client (for example, if fertilizer is distributed in bags of 9 kg, 6 kg, 5 kg and 1 kg and a client orders 11 kg - your algorithm should recommend 6 kg and 5 kg instead of 9 kg and 2x1 kg bags).
 3. Include relevant Unit Tests and Integration Tests for your solution
-4. Validate any inputs for possible edge cases
+4. Validate any inputs for possible edge cases and security vulnerabilities
 
 ## Bonus Points (General)
-1. Using the same APEX function, write a Web Frontend (Javascript, JS library of your choice, Visualforce, Lightning Web Component view or a Salesforce Screen Flow) to take input and display the same results
+1. Using the same APEX code for the backend logic, write a Web Frontend (Javascript, JS library of your choice, Visualforce, Lightning Web Component view or a Salesforce Screen Flow) to take input and display the same results
 2. Demonstrate how you would migrate your code between environments using Salesforce CLI tools, including the commands to do so
 3. Currently the APEX, Java and JS projects are all contained in one file each within the same repository. Describe how you would organize the project and justify your logic.
 
-## Materials to submit:
-1. A copy of your code uploaded to a github repository
+# Materials to submit:
+1. A copy of your code uploaded to a new github repository
 2. Any Salesforce Custom Objects and frontends, in the format of your choice (Bonus points for use of the CLI to do this)
 3. Documentation (in markdown format), including which objectives you did/did not complete and an explanation of how your code works as well as your answers to the questions above.
 
-Make sure that the github repository is shared with the github account in the intro email and send a link to this repository via email by the code test deadline (within 24 hours of the code test starting, the exact time will be included in the email). Any work committed to the github repository after the deadline will not be considered.
+Make sure that the github repository is shared with the github account in the intro email and send a link to this repository via email by the code test deadline (within 24 hours of the code test starting, the exact time will be included in the email). Any work committed to the github repository/uploaded to the scratch org after the deadline will not be considered.
 
 ## Notes 
 1. **If you use generative AI for any part of this exercise, cite it as a source and include the line numbers for the code written this way. Also include an explanation of what you did to verify the accuracy/safety of the code generated by AI.**

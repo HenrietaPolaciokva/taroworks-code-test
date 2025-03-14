@@ -9,3 +9,8 @@ sf org open --target-org code-test-org
 # 1. Create a new Force.com site (Setup -> Sites -> New Site)
 # 2. After creating the site, edit "Public Access Settings" and add "Enabled Apex Class Access" to it
 # 3. Activate the site and test from POSTMan or similar tool
+# 4. Set the IP Login Range for the Sysadmin profile to "Open" (Setup -> Profiles -> System Administrator -> Login IP Ranges -> add from 0.0.0.0 to 255.255.255.255)
+
+#Generate a password and save the username and password for the scratch org
+sfdx force user password generate --target-org code-test-org 
+sfdx org display user --target-org code-test-org > code-test-org-$(date -u +"%Y%m%d%H%M%S").txt
