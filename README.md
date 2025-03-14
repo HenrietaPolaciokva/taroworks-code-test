@@ -1,18 +1,25 @@
-# Salesforce DX Project: Next Steps
+# TaroWorks Code Test
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+# Application Security
 
-## How Do You Plan to Deploy Your Changes?
+There are 4 security issues with this repository. Identify all 4 and explain how you would mitigate them.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+# Salesforce API
 
-## Configure Your Salesforce DX Project
+The API included here has 3 stylistic issues. Identify all 3 and explain how you would improve them.
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+# Coding Environment - Salesforce
 
-## Read All About It
+You will have received an email with your scratch org credentials. You can use these credentials to login and configure the org.
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+```
+curl --location --request POST 'https://fun-momentum-8899-dev-ed.scratch.my.salesforce-sites.com/services/apexrest/ClientOrderProcessor?name=TaroDev'
+```
+
+# Coding Test - Android/Java
+
+In the interest of simplicity, instead of an entire Android app you have been provided a command line utility. The included code will call the Salesforce API described:
+
+```
+java java/CallAPIClass.java TaroDev 
+```

@@ -1,0 +1,50 @@
+{
+	"info": {
+		"_postman_id": "b6aff33d-1b8d-4b53-a88a-47e9a0e1eee4",
+		"name": "TaroWorks Code Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32405523"
+	},
+	"item": [
+		{
+			"name": "Test POST",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{api-key}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api-key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/services/apexrest/ClientOrderProcessor?name=TaroDev",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"services",
+						"apexrest",
+						"ClientOrderProcessor"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "TaroDev"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
