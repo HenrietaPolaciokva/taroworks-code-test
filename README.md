@@ -3,7 +3,7 @@
 # Part 0: Coding Environment
 
 This test will require:
-1. A local Java environment (https://www.java.com/en/download/help/download_options.html)
+1. A local Java environment, v17+ (https://www.java.com/en/download/help/download_options.html) 
 2. Access to a web browser (Chrome is recommended)
 3. An Android Development Environment (https://developer.android.com/studio)
 4. Salesforce CLI Tools (https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli.htm)
