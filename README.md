@@ -18,12 +18,12 @@ This test will require:
 
 You have already received an email with your scratch org credentials. You can use these credentials to login and configure the salesforce scratch org. The environment will be deleted within a month of your code test, you can treat it as “yours” and make any changes you wish (please do not change the admin password or add multi-factor authentication as this may complicate scoring). The environment will be checked automatically to verify functionality and your code will be reviewed both in your submission and within the salesforce org.
 
- Note that the pre-configured URL ("fun-momentum-8899-dev-ed") is for demonstration only and should not be used in your submission - use the credentials sent via email instead.
+ Note that the pre-configured URL ("fun-momentum-8898-dev-ed") is for demonstration only and should not be used in your submission - use the credentials sent via email instead.
 
  This cURL command demonstrates the API - replace the URL with your scratch org to verify that your org is configured properly. Also included in this repository are POSTMan tests that accomplish the same task.
 
 ```
-curl --location --request POST 'https://fun-momentum-8899-dev-ed.scratch.my.salesforce-sites.com/services/apexrest/ClientOrderProcessor?name=TaroDev'
+curl --location --request POST 'https://fun-momentum-8898-dev-ed.scratch.my.salesforce-sites.com/services/apexrest/ClientOrderProcessor?name=TaroDev'
 ```
 
 ## Java Environment

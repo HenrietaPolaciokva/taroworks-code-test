@@ -6,7 +6,7 @@ import java.net.URL;
 
 public class CallAPIClass {
 
-    private static final String API_MAIN_URL = "https://fun-momentum-8899-dev-ed.scratch.my.salesforce-sites.com/services/apexrest/ClientOrderProcessor";
+    private static final String API_MAIN_URL = "https://fun-momentum-8898-dev-ed.scratch.my.salesforce-sites.com/services/apexrest/ClientOrderProcessor";
 
     public static void main(String[] args) {
         if (args.length < 1) {
