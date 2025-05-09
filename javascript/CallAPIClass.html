@@ -3,40 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Call API</title>
+    <title>Fertilizer Order Processor</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top for longer content */
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+
+        fieldset {
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        legend {
+            padding: 0 10px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+            width: 100%;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3; /* Light grey */
+            border-top: 3px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .output-area {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #ecf0f1;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+            word-break: break-all; /* Ensure long strings wrap */
+        }
+
+        .output-area.success {
+            background-color: #e8f5e9; /* Light green */
+            border-left: 5px solid #4CAF50; /* Green */
+            color: #2e7d32;
+        }
+        .output-area.success strong {
+            color: #1b5e20;
+        }
+
+        .output-area.error {
+            background-color: #ffebee; /* Light red */
+            border-left: 5px solid #f44336; /* Red */
+            color: #c62828;
+        }
+         .output-area.error strong {
+            color: #b71c1c;
+        }
+
+        .output-item {
+            margin-bottom: 8px;
+        }
+        .output-item strong {
+            margin-right: 5px;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Call API</h1>
-    <input type="text" id="nameInput" placeholder="Enter your name">
-    <button onclick="callAPI()">Submit</button>
-    <pre id="responseOutput"></pre>
+    <div class="container">
+        <h1>Fertilizer Order</h1>
+        <form id="apiForm">
+            <fieldset>
+                <legend>Order Details</legend>
+                <div class="form-group">
+                    <label for="nameInput">Your Name:</label>
+                    <input type="text" id="nameInput" placeholder="e.g., Jane Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="orderQuantityInput">Total Order Quantity (kg):</label>
+                    <input type="number" id="orderQuantityInput" placeholder="e.g., 26" required min="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="fertilizerTypeInput">Preferred Bag Size:</label>
+                    <select id="fertilizerTypeInput">
+                        <option value="10kg">10kg Bags</option>
+                        <option value="5kg">5kg Bags</option>
+                        <option value="1kg">1kg Bags</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <button type="submit" id="submitButton">
+                <span id="buttonText">Submit Order</span>
+                <div class="spinner" id="loadingSpinner" style="display: none;"></div>
+            </button>
+        </form>
+
+        <div id="responseOutput" class="output-area" style="display: none;"></div>
+    </div>
 
     <script>
-        const API_MAIN_URL = 'https://fun-momentum-8898-dev-ed.scratch.my.salesforce-sites.com/services/apexrest/ClientOrderProcessor';
+ 
+        const API_ENDPOINT_URL = 'https://app-momentum-1601-dev-ed.scratch.my.salesforce.com/services/apexrest/ClientOrderProcessor'; // Adjusted to be the full endpoint
 
-        function callAPI() {
-            const name = document.getElementById('nameInput').value;
-            if (!name) {
-                alert('Please provide a name.');
+        const apiForm = document.getElementById('apiForm');
+        const nameInput = document.getElementById('nameInput');
+        const orderQuantityInput = document.getElementById('orderQuantityInput');
+        const fertilizerTypeInput = document.getElementById('fertilizerTypeInput');
+        const submitButton = document.getElementById('submitButton');
+        const buttonText = document.getElementById('buttonText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const responseOutput = document.getElementById('responseOutput');
+
+        apiForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            callAPI();
+        });
+
+        async function callAPI() {
+            const name = nameInput.value.trim();
+            const orderQuantity = orderQuantityInput.value;
+            const fertilizerType = fertilizerTypeInput.value;
+
+            // Basic validation feedback (though HTML5 `required` helps)
+            if (!name || !orderQuantity) {
+                displayResponse({ error: "Name and Order Quantity are required." }, true);
+                return;
+            }
+            if (parseInt(orderQuantity) <= 0) {
+                 displayResponse({ error: "Order Quantity must be a positive number." }, true);
                 return;
             }
 
-            const apiUrl = `${API_MAIN_URL}?name=${encodeURIComponent(name)}`;
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', apiUrl, true);
 
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    const responseOutput = document.getElementById('responseOutput');
-                    if (xhr.status === 200) {
-                        responseOutput.textContent = `Response: ${xhr.responseText}`;
-                    } else {
-                        responseOutput.textContent = 'POST request did not work';
+            // UI updates for loading state
+            submitButton.disabled = true;
+            buttonText.textContent = 'Processing...';
+            loadingSpinner.style.display = 'block';
+            responseOutput.style.display = 'none'; // we want to hide previous response
+            responseOutput.className = 'output-area'; // then Reset classes
+
+            try {
+                const response = await fetch(API_ENDPOINT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                       //  'Authorization': `Bearer ${system.getenv('ACCESS_TOKEN')}` // If your Salesforce API requires authentication
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        orderQuantity: parseInt(orderQuantity), // Ensure it's a number
+                        fertilizerType: fertilizerType
+                    })
+                });
+
+                // Check if the response is OK (status in the range 200-299)
+                if (!response.ok) {
+                    let errorData;
+                    try {
+                        // Try to parse error response from Salesforce, which is often an array of objects
+                        errorData = await response.json();
+                        // Salesforce often returns errors as an array [{ message: '...', errorCode: '...' }]
+                        const errorMessage = errorData[0]?.message || `HTTP error! Status: ${response.status}`;
+                        throw new Error(errorMessage);
+                    } catch (parseError) {
+                        // If parsing fails, use the status text
+                        throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
                     }
                 }
-            };
 
-            xhr.send();
+                const data = await response.json();
+                displayResponse(data, false);
+
+            } catch (error) {
+                console.error('API Call Error:', error);
+                displayResponse({ message: error.message || "An unknown error occurred." }, true);
+            } finally {
+                // Revert UI changes
+                submitButton.disabled = false;
+                buttonText.textContent = 'Submit Order';
+                loadingSpinner.style.display = 'none';
+            }
+        }
+
+        function displayResponse(data, isError) {
+            responseOutput.innerHTML = ''; // Clear previous content
+            responseOutput.style.display = 'block';
+
+            if (isError) {
+                responseOutput.className = 'output-area error';
+                const errorTitle = document.createElement('strong');
+                errorTitle.textContent = 'Error:';
+                responseOutput.appendChild(errorTitle);
+                responseOutput.appendChild(document.createElement('br'));
+                responseOutput.appendChild(document.createTextNode(data.message || "Could not process request."));
+            } else {
+                responseOutput.className = 'output-area success';
+                // 'data' is the direct response object from our Apex class
+                // and it contains name, orderQuantity, fertilizerType, totalBags, bagDistribution
+                const fieldsToShow = {
+                    "Client Name": data.name,
+                    "Order Quantity": `${data.orderQuantity}kg`,
+                    "Preferred Bag Size": data.fertilizerType,
+                    "Total Bags Needed": data.totalBags,
+                    "Bag Distribution": data.bagDistribution
+                };
+
+                for (const [label, value] of Object.entries(fieldsToShow)) {
+                    if (value !== undefined) { // Only show if value exists
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'output-item';
+                        const strongLabel = document.createElement('strong');
+                        strongLabel.textContent = `${label}:`;
+                        itemDiv.appendChild(strongLabel);
+                        itemDiv.appendChild(document.createTextNode(` ${value}`));
+                        responseOutput.appendChild(itemDiv);
+                    }
+                }
+            }
         }
     </script>
 </body>

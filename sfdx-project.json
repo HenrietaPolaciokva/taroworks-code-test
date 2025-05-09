@@ -7,6 +7,6 @@
   ],
   "name": "taroworks-code-test",
   "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sfdcLoginUrl": "https://test.salesforce.com",
   "sourceApiVersion": "62.0"
 }

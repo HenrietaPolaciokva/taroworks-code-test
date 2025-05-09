@@ -31,7 +31,7 @@ curl --location --request POST 'https://fun-momentum-8898-dev-ed.scratch.my.sale
 You have been provided a Java command line starter template. The included code will call the Salesforce API described using this syntax:
 
 ```
-java java/CallAPIClass.java TaroDev 
+java java/CallAPIClass.java TaroDev w
 ```
 
 ## Javascript Environment
